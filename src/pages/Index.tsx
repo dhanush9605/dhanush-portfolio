@@ -9,10 +9,17 @@ import portrait from "@/assets/portrait.jpg";
 import unityRpg from "@/assets/unity-rpg.jpg";
 import votingSystem from "@/assets/voting-system.jpg";
 import visionImg from "@/assets/vision.jpg";
+import emailjs from "@emailjs/browser";
+
+const SERVICE_ID = "service_ji79p6f";
+const TEMPLATE_ID = "template_v59a5vo";
+const PUBLIC_KEY = "7XPLRUUs9mTEXIH1I";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{ ok: boolean; msg: string } | null>(null);
 
   const navItems = [
     { label: "Home", href: "#home" },
@@ -26,7 +33,7 @@ const Index = () => {
 
   const skills = [
     { category: "Game Development", items: ["Unity Engine", "Level Design", "Game Mechanics", "Performance Optimization"] },
-    { category: "Graphics & Algorithms", items: ["Bresenham Algorithm", "Midpoint Circle", "Boundary Fill", "DDA Line Drawing"] },
+    // { category: "Graphics & Algorithms", items: ["Bresenham Algorithm", "Midpoint Circle", "Boundary Fill", "DDA Line Drawing"] },
     { category: "Web & Databases", items: ["SQL Database Design", "Responsive Web Design", "Frontend Development", "RESTful APIs"] },
     { category: "Design & UX", items: ["UI/UX Design", "Wireframing", "Prototyping", "User-Centered Design"] },
   ];
@@ -93,16 +100,45 @@ const Index = () => {
     }
   ];
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  // New: EmailJS-based contact submit handler
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus(null);
+
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const subject = formData.get('subject');
-    const message = formData.get('message');
-    
-    window.location.href = `mailto:dhanush@example.com?subject=${encodeURIComponent(String(subject))}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+    const name = String(formData.get('name') || "").trim();
+    const email = String(formData.get('email') || "").trim();
+    const subject = String(formData.get('subject') || "").trim();
+    const message = String(formData.get('message') || "").trim();
+
+    // Basic validation
+    if (!name || !email || !subject || !message) {
+      setStatus({ ok: false, msg: "Please fill all required fields." });
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus({ ok: false, msg: "Please enter a valid email address." });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        from_name: name,
+        from_email: email,
+        subject,
+        message,
+      }, PUBLIC_KEY);
+
+      setStatus({ ok: true, msg: "Message sent — thank you!" });
+      form.reset();
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setStatus({ ok: false, msg: "Failed to send message. Try again later." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -114,7 +150,7 @@ const Index = () => {
             <a href="#home" className="text-xl font-bold font-orbitron tracking-tight">
               DHANUSH<span className="text-muted-foreground">.</span>
             </a>
-            
+
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
@@ -158,14 +194,14 @@ const Index = () => {
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         <div className="absolute inset-0 grid-pattern opacity-50" />
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in-up">
               <div className="inline-block px-4 py-2 bg-accent/50 rounded-full text-sm font-medium border border-border">
                 PORTFOLIO WEBSITE
               </div>
-              
+
               <div>
                 <p className="text-lg text-muted-foreground mb-2">Hello, I'm 👋</p>
                 <h1 className="text-5xl md:text-7xl font-bold font-orbitron mb-4">
@@ -193,7 +229,8 @@ const Index = () => {
                   <a href="#portfolio">View Portfolio</a>
                 </Button>
                 <Button asChild size="lg" variant="outline">
-                  <a href="mailto:dhanush@example.com">
+                  {/* changed: open contact section instead of mailto */}
+                  <a href="#contact">
                     <Mail className="w-4 h-4 mr-2" />
                     Email Me
                   </a>
@@ -201,10 +238,10 @@ const Index = () => {
               </div>
 
               <div className="flex gap-4 pt-4">
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-card border border-border rounded-lg hover:bg-accent transition-colors">
+                <a href="https://www.linkedin.com/in/dhanushrajesh6/" target="_blank" rel="noopener noreferrer" className="p-2 bg-card border border-border rounded-lg hover:bg-accent transition-colors">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-card border border-border rounded-lg hover:bg-accent transition-colors">
+                <a href="https://github.com/dhanush9605" target="_blank" rel="noopener noreferrer" className="p-2 bg-card border border-border rounded-lg hover:bg-accent transition-colors">
                   <Github className="w-5 h-5" />
                 </a>
               </div>
@@ -212,9 +249,9 @@ const Index = () => {
 
             <div className="relative animate-slide-in-right">
               <div className="relative rounded-2xl overflow-hidden border-2 border-border shadow-[var(--shadow-elegant)]">
-                <img 
-                  src={portrait} 
-                  alt="Dhanush Rajesh - Professional Portrait" 
+                <img
+                  src={portrait}
+                  alt="Dhanush Rajesh - Professional Portrait"
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -231,7 +268,7 @@ const Index = () => {
             <h2 className="text-4xl md:text-5xl font-bold font-orbitron mb-8 animate-fade-in">
               ABOUT ME
             </h2>
-            
+
             <Card className="p-8 bg-card border-border animate-scale-in">
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                 I am Dhanush, a Computer Science and Design graduate from Kerala with a strong foundation in software development, computer graphics, and game design. My academic work includes a Unity-based level RPG and a blockchain-inspired decentralized voting system. I'm methodical, persistent, and resourceful, focused now on job applications, portfolio web projects, and interview preparation.
@@ -343,24 +380,24 @@ const Index = () => {
             {projects.map((project, idx) => (
               <Card key={project.id} className="overflow-hidden bg-card border-border group animate-fade-in-up" style={{ animationDelay: `${idx * 0.2}s` }}>
                 <div className="relative overflow-hidden">
-                  <img 
-                    src={project.image} 
+                  <img
+                    src={project.image}
                     alt={project.title}
                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60" />
                 </div>
-                
+
                 <div className="p-6">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
                     <span>{project.role}</span>
                     <span>•</span>
                     <span>{project.timeline}</span>
                   </div>
-                  
+
                   <h3 className="text-xl font-semibold mb-3 font-orbitron">{project.title}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{project.overview}</p>
-                  
+
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tech.map((tech) => (
                       <span key={tech} className="px-2 py-1 bg-accent text-xs rounded">
@@ -369,7 +406,7 @@ const Index = () => {
                     ))}
                   </div>
 
-                  <Button 
+                  <Button
                     onClick={() => setSelectedProject(project.id)}
                     variant="outline"
                     className="w-full"
@@ -398,7 +435,7 @@ const Index = () => {
                   <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center flex-shrink-0 font-bold font-orbitron">
                     {String(idx + 1).padStart(2, '0')}
                   </div>
-                  
+
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold mb-2 font-orbitron">{project.title}</h3>
                     <p className="text-sm text-muted-foreground mb-3">{project.timeline}</p>
@@ -418,8 +455,8 @@ const Index = () => {
 
           <div className="mt-12 text-center">
             <Card className="inline-block p-8 bg-card border-border">
-              <img 
-                src={visionImg} 
+              <img
+                src={visionImg}
                 alt="Vision - Building Tomorrow"
                 className="w-full max-w-2xl rounded-lg mb-6"
               />
@@ -459,8 +496,8 @@ const Index = () => {
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
-                  <select 
-                    id="subject" 
+                  <select
+                    id="subject"
                     name="subject"
                     className="w-full px-3 py-2 bg-background border border-input rounded-md text-foreground"
                     required
@@ -477,24 +514,30 @@ const Index = () => {
                   <Textarea id="message" name="message" rows={6} required className="bg-background" />
                 </div>
 
-                <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90">
-                  Send Message
+                <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90" disabled={loading}>
+                  {loading ? "Sending..." : "Send Message"}
                   <Mail className="w-4 h-4 ml-2" />
                 </Button>
+
+                {status && (
+                  <p className={`mt-4 text-center ${status.ok ? "text-green-400" : "text-red-400"}`}>
+                    {status.msg}
+                  </p>
+                )}
               </form>
 
               <div className="mt-8 pt-8 border-t border-border">
                 <h3 className="text-lg font-semibold mb-4 font-orbitron text-center">Connect With Me</h3>
                 <div className="flex justify-center gap-4">
-                  <a 
-                    href="mailto:dhanush@example.com"
+                  <a
+                    href="mailto:dhanushrajesh2000@gmail.com"
                     className="p-3 bg-background border border-border rounded-lg hover:bg-accent transition-colors"
                     aria-label="Email Dhanush"
                   >
                     <Mail className="w-6 h-6" />
                   </a>
-                  <a 
-                    href="https://linkedin.com"
+                  <a
+                    href="https://www.linkedin.com/in/dhanushrajesh6/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-background border border-border rounded-lg hover:bg-accent transition-colors"
@@ -502,8 +545,8 @@ const Index = () => {
                   >
                     <Linkedin className="w-6 h-6" />
                   </a>
-                  <a 
-                    href="https://github.com"
+                  <a
+                    href="https://github.com/dhanush9605"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-background border border-border rounded-lg hover:bg-accent transition-colors"
@@ -523,7 +566,7 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2024 Dhanush Rajesh — Designed & Built by Dhanush
+              ©2025 Dhanush Rajesh — Designed & Built by Dhanush
             </p>
             <div className="flex gap-6">
               {navItems.slice(0, 4).map((item) => (
@@ -548,7 +591,7 @@ const Index = () => {
               {(() => {
                 const project = projects.find(p => p.id === selectedProject);
                 if (!project) return null;
-                
+
                 return (
                   <>
                     <DialogHeader>
@@ -559,8 +602,8 @@ const Index = () => {
                     </DialogHeader>
 
                     <div className="space-y-6 mt-6">
-                      <img 
-                        src={project.image} 
+                      <img
+                        src={project.image}
                         alt={project.title}
                         className="w-full rounded-lg"
                       />
