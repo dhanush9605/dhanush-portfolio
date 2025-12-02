@@ -70,7 +70,7 @@ const Index = () => {
       id: "unity-rpg",
       title: "Unity RPG Game Development",
       role: "Game Developer",
-      timeline: "Jan 2024 – Apr 2024",
+      timeline: "Jan 2023 – Apr 2023",
       overview: "Designed and developed a level-based RPG in Unity with comprehensive player progression, combat mechanics, and interactive environments.",
       highlights: [
         "Implemented dynamic player progression system with skill trees",
