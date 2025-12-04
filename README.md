@@ -1,28 +1,57 @@
-# Dhanush Rajesh – Portfolio Website
+# 🚀 Dhanush Rajesh – Portfolio Website
 
-This is my personal developer portfolio website showcasing my work, skills, experience, and projects.  
-The site is designed with a clean and modern dark UI theme and built using **React**, **Vite**, and **Tailwind CSS** for fast performance and responsiveness.
+A modern, responsive, and visually appealing personal portfolio website built using **React**, **Vite**, and **Tailwind CSS**.  
+This website showcases my skills, experience, and projects with a clean dark UI and fast performance.
 
 ---
 
-## 🚀 Live Website  
-**Visit my portfolio:**  
+## 🔗 Live Website  
 https://dhanush-rajesh.vercel.app
 
 ---
 
-## 📌 Features
+## 🏷️ Tech Badges
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![ShadCN](https://img.shields.io/badge/ShadCN%20UI-black?style=for-the-badge&logo=ui-ux&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)
+
+---
+
+## 📸 Preview
+*(Insert screenshot here — upload an image and paste the link below)*  
+Example:
+
+![Portfolio Screenshot](https://your-screenshot-url-here.png)
+
+---
+
+## 📖 Overview
+
+This is my personal developer portfolio website designed to highlight:
+
+- My professional background  
+- Skills and tech stack  
+- Projects and experience  
+- Services I offer  
+- Simple contact system (EmailJS)
+
+Built with a strong focus on speed, responsiveness, and clean design.
+
+---
+
+## ✨ Features
 
 - Fully responsive dark-themed UI  
-- Home section with introduction  
-- Skills and tools I use  
-- Services section  
-- Projects & portfolio gallery  
-- Experience timeline  
-- Contact section with EmailJS integration  
-- Smooth UI animations  
-- Fast build using Vite  
-- Clean component-based structure
+- Smooth animations & modern layout  
+- Skills, services, and experience sections  
+- Portfolio/project showcase  
+- Email contact form (EmailJS)  
+- Fast performance using Vite  
+- Clean and modular React components  
 
 ---
 
@@ -33,10 +62,10 @@ https://dhanush-rajesh.vercel.app
 - Vite  
 - Tailwind CSS  
 - TypeScript  
-- ShadCN UI (if used)  
+- ShadCN UI  
 
 **Deployment:**  
-- Vercel
+- Vercel  
 
 ---
 
