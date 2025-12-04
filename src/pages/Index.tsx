@@ -86,7 +86,7 @@ const Index = () => {
       id: "voting-system",
       title: "Decentralized Voting System",
       role: "Full-Stack Developer",
-      timeline: "Aug 2024 – Nov 2024",
+      timeline: "Nov 2025 – ongoing",
       overview: "Built a blockchain-inspired decentralized voting platform with comprehensive SQL database architecture and intuitive user interfaces.",
       highlights: [
         "Designed normalized SQL database schemas for voter and admin data",
@@ -291,10 +291,9 @@ const Index = () => {
               <div className="border-t border-border pt-6 mb-6">
                 <h3 className="text-xl font-semibold mb-3 font-orbitron">Currently Focusing On</h3>
                 <p className="text-muted-foreground">
-                  Job applications, building portfolio web projects, and preparing for technical interviews.
+                  Actively pursuing job opportunities, expanding my portfolio with real projects, and sharpening technical interview skills.
                 </p>
               </div>
-
               <div className="border-t border-border pt-6">
                 <h3 className="text-xl font-semibold mb-3 font-orbitron">Beyond Code</h3>
                 <p className="text-muted-foreground">
@@ -329,13 +328,7 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="mt-12 max-w-2xl mx-auto">
-            <Card className="p-6 bg-accent/50 border-border">
-              <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">Computer Graphics:</span> Practical implementations including Bresenham line algorithm, Midpoint Circle algorithm, Boundary Fill, and DDA line drawing for efficient rendering and visualization.
-              </p>
-            </Card>
-          </div>
+
         </div>
       </section>
 
