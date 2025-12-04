@@ -32,10 +32,33 @@ const Index = () => {
   ];
 
   const skills = [
-    { category: "Game Development", items: ["Unity Engine", "Level Design", "Game Mechanics", "Performance Optimization"] },
-    // { category: "Graphics & Algorithms", items: ["Bresenham Algorithm", "Midpoint Circle", "Boundary Fill", "DDA Line Drawing"] },
-    { category: "Web & Databases", items: ["SQL Database Design", "Responsive Web Design", "Frontend Development", "RESTful APIs"] },
-    { category: "Design & UX", items: ["UI/UX Design", "Wireframing", "Prototyping", "User-Centered Design"] },
+    {
+      category: "Game Development",
+      items: [
+        { name: "Unity Engine", level: "Advanced" },
+        { name: "Level Design", level: "Intermediate" },
+        { name: "Game Mechanics", level: "Intermediate" },
+        { name: "Performance Optimization", level: "Intermediate" },
+      ],
+    },
+    {
+      category: "Web & Databases",
+      items: [
+        { name: "SQL Database Design", level: "Intermediate" },
+        { name: "Responsive Web Design", level: "Intermediate" },
+        { name: "Frontend Development", level: "Intermediate" },
+        { name: "RESTful APIs", level: "Intermediate" },
+      ],
+    },
+    {
+      category: "Design & UX",
+      items: [
+        { name: "UI/UX Design", level: "Intermediate" },
+        { name: "Wireframing", level: "Intermediate" },
+        { name: "Prototyping", level: "Intermediate" },
+        { name: "User-Centered Design", level: "Intermediate" },
+      ],
+    },
   ];
 
   const services = [
@@ -70,7 +93,7 @@ const Index = () => {
       id: "unity-rpg",
       title: "Unity RPG Game Development",
       role: "Game Developer",
-      timeline: "Jan 2023 – Apr 2023",
+      timeline: "Jan 2024 – Apr 2024",
       overview: "Designed and developed a level-based RPG in Unity with comprehensive player progression, combat mechanics, and interactive environments.",
       highlights: [
         "Implemented dynamic player progression system with skill trees",
@@ -86,7 +109,7 @@ const Index = () => {
       id: "voting-system",
       title: "Decentralized Voting System",
       role: "Full-Stack Developer",
-      timeline: "Nov 2025 – ongoing",
+      timeline: "Nov 2025 – Ongoing",
       overview: "Built a blockchain-inspired decentralized voting platform with comprehensive SQL database architecture and intuitive user interfaces.",
       highlights: [
         "Designed normalized SQL database schemas for voter and admin data",
@@ -318,9 +341,12 @@ const Index = () => {
                 <h3 className="text-xl font-semibold mb-4 font-orbitron">{skillGroup.category}</h3>
                 <div className="space-y-3">
                   {skillGroup.items.map((skill) => (
-                    <div key={skill} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-foreground rounded-full" />
-                      <span className="text-muted-foreground">{skill}</span>
+                    <div key={skill.name} className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-foreground rounded-full" />
+                        <span className="text-muted-foreground">{skill.name}</span>
+                      </div>
+                      <span className="text-xs px-2 py-1 rounded-full bg-accent/20 text-foreground">{skill.level}</span>
                     </div>
                   ))}
                 </div>
