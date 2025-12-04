@@ -556,11 +556,10 @@ const Index = () => {
                   </a>
                   <a
                     href="tel:+9196055613921"
-                    className="p-3 bg-background border border-border rounded-lg hover:bg-accent transition-colors flex items-center gap-2"
+                    className="p-3 bg-background border border-border rounded-lg hover:bg-accent transition-colors"
                     aria-label="Call Dhanush"
                   >
                     <Phone className="w-6 h-6" />
-                    <span className="hidden sm:inline text-sm">+91 96055 613921</span>
                   </a>
                 </div>
               </div>
