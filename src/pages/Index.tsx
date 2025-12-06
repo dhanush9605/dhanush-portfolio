@@ -31,6 +31,7 @@ const Index = () => {
     { label: "Contact", href: "#contact" },
   ];
 
+  // Restructured skills to include proficiency levels
   const skills = [
     {
       category: "Game Development",
@@ -574,7 +575,7 @@ const Index = () => {
                     <Github className="w-6 h-6" />
                   </a>
                   <a
-                    href="tel:+9196055613921"
+                    href="tel:+919605561391"
                     className="p-3 bg-background border border-border rounded-lg hover:bg-accent transition-colors"
                     aria-label="Call Dhanush"
                   >
